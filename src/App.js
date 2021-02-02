@@ -6,8 +6,11 @@ class Subject extends Component{
   render(){
     return(
       <header>
-        <h1>WEB</h1>
-        world wide web!
+        <h1>{this.props.title}</h1>
+        {this.props.sub}
+        {/* props는 태그(attribute)를 대신한다.
+            {}는 jsx
+        */}
       </header>
     );
   }
@@ -34,8 +37,8 @@ class Content extends Component{
   render(){
     return(
       <article>
-        <h2>HTML</h2>
-        HTML is HyperText Markup Laguage.
+        <h2>{this.props.title}</h2>
+        {this.props.doc}
       </article>
     );
   }
@@ -45,9 +48,14 @@ class App extends Component {
   render(){
   return (
       <div className="App">
-        <Subject></Subject>
+        <Subject title="WEB" sub="word wide web"></Subject>
+        {/* WEB과 word wide web 는 attribute 속성
+            this.props.name을 사용하면 된다.
+            jsx도 사용해야한다.
+        */}
+        <Subject title="React" sub="For UI"></Subject>
         <TOC></TOC>
-        <Content></Content>
+        <Content title="HTML" doc="HTML is HyperText Markup Laguage."></Content>
       </div>
     );
   }
