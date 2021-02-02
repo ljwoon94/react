@@ -6,7 +6,7 @@ class Subject extends Component{
     render(){
       return(
         <header>
-          <h1>{this.props.title}</h1>
+          <h1><a href ="/">{this.props.title}</a></h1>
           {this.props.sub}
           {/* props는 태그(attribute)를 대신한다.
               {}는 jsx
