@@ -16,11 +16,11 @@ class App extends Component {
     this.max_content_id = 3;
     //데이터를 추가할때 사용하는 변수 state에 넣을 필요가ㅏ 없다.
     this.state ={
-      mode:'create',
+      mode:'read',
       // 페이지가 어디 경로인지 확인용으로 mode를 만듦
       selected_content_id:2,
       subject:{title:'WEB',sub:'World Wide Web!'},
-      welcome:{title:'welcome', desc:'Hello,React!!'},
+      welcome:{title:'Welcome', desc:'Hello,React!!'},
       contents:[
         {id:1, title:'HTML',desc:'HTML is for information ...'},
         {id:2, title:'CSS',desc:'CSS is for design ...'},
@@ -28,6 +28,7 @@ class App extends Component {
       ]
     }
   }
+  
   render(){
     console.log('App render')
     let _title, _desc, _article = null;
@@ -61,6 +62,7 @@ class App extends Component {
         //push는 배열 원본을 바꾸는거면 concat은 배열원본을 그대로 두고 추가하는것이다.
         var newContents = Array.from(this.state.contents);
         //Array.from()은 배열을 다른 변수에 넣을때 사용.
+        //내용은 같지만 다른 배열 생성
         //Object.assing({},a)내용은 같지만 다른 객체를 만들때 사용.
         newContents.push({id:this.max_content_id, title:_title, desc:_desc});
         

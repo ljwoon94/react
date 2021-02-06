@@ -27,11 +27,11 @@ class TOC extends Component{
                 <li key={data[i].id}>
                     <a
                         href ={"/content/"+data[i].id}
-                        // data-id={data[i].id}
-                        onClick={function(id, e){
+                        data-id={data[i].id}
+                        onClick={function(e){
                             e.preventDefault();
                             this.props.onChangePage(e.target.dataset.id);
-                        }.bind(this,data[i].id, 10)}
+                        }.bind(this)}
                     >{data[i].title}</a>
                 </li>);
             // <li key={data[i].id}도 반드시 입력
