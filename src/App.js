@@ -54,13 +54,18 @@ class App extends Component {
         // this.state.contents.push(
         //   {id:this.max_content_id, title:_title, desc:_desc}
         // );
-        var _contents = this.state.contents.concat(
-            {id:this.max_content_id, title:_title, desc:_desc}
-          );
+        // var _contents = this.state.contents.concat(
+        //     {id:this.max_content_id, title:_title, desc:_desc}
+        //   );
         //push랑 concat의 차이
         //push는 배열 원본을 바꾸는거면 concat은 배열원본을 그대로 두고 추가하는것이다.
+        var newContents = Array.from(this.state.contents);
+        //Array.from()은 배열을 다른 변수에 넣을때 사용.
+        //Object.assing({},a)내용은 같지만 다른 객체를 만들때 사용.
+        newContents.push({id:this.max_content_id, title:_title, desc:_desc});
+        
         this.setState({
-          contents:_contents
+          contents:newContents
         });
         console.log(_title, _desc);
       }.bind(this)}></CreateContent>
