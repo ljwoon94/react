@@ -1,7 +1,9 @@
 import React,{ Component } from "react";
 import TOC from "./components/TOC";
-import Content from "./components/Content";
+import Control from "./components/Control";
 import Subject from "./components/Subject";
+import ReadContent from "./components/ReadContent";
+import CreateContent from "./components/CreateContent";
 
 // 컴포넌트 생성 템플릿이라 생각하면 된다.
 
@@ -11,8 +13,10 @@ class App extends Component {
     super(props);
     // props 초기화
     //컴포넌트가 실행될때 render()보다 먼저 실행되 초기화를 담당
+    this.max_content_id = 3;
+    //데이터를 추가할때 사용하는 변수 state에 넣을 필요가ㅏ 없다.
     this.state ={
-      mode:'read',
+      mode:'create',
       // 페이지가 어디 경로인지 확인용으로 mode를 만듦
       selected_content_id:2,
       subject:{title:'WEB',sub:'World Wide Web!'},
@@ -26,11 +30,11 @@ class App extends Component {
   }
   render(){
     console.log('App render')
-    let _title, _desc = null;
+    let _title, _desc, _article = null;
     if(this.state.mode ==='welcome'){
       _title = this.state.welcome.title;
       _desc = this.state.welcome.desc;
-
+      _article = <ReadContent title={_title} desc={_desc}></ReadContent>
     }else if(this.state.mode ==='read'){
       let i=0;
       while(i<this.state.contents.length){
@@ -42,6 +46,24 @@ class App extends Component {
         }
         i = i+1;
       }
+      _article =<ReadContent title={_title} desc={_desc}></ReadContent>
+    } else if (this.state.mode === 'create'){
+      _article = <CreateContent onSubmit={function(_title, _desc){
+        // add content to this.state.contents
+        this.max_content_id = this.max_content_id+1;
+        // this.state.contents.push(
+        //   {id:this.max_content_id, title:_title, desc:_desc}
+        // );
+        var _contents = this.state.contents.concat(
+            {id:this.max_content_id, title:_title, desc:_desc}
+          );
+        //push랑 concat의 차이
+        //push는 배열 원본을 바꾸는거면 concat은 배열원본을 그대로 두고 추가하는것이다.
+        this.setState({
+          contents:_contents
+        });
+        console.log(_title, _desc);
+      }.bind(this)}></CreateContent>
     }
     return (
       <div className="App">
@@ -85,7 +107,12 @@ class App extends Component {
           }.bind(this)} 
           data= {this.state.contents}
         ></TOC>
-        <Content title={_title} desc={_desc}></Content>
+        <Control onChangeMode={function(_mode){
+          this.setState({
+            mode:_mode
+          });
+        }.bind(this)}></Control>
+        {_article}
       </div>
     );
   }
